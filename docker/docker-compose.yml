@@ -1,0 +1,12 @@
+version: "3.9"
+
+services: 
+  nats:
+    build: 
+      context: nats/
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+
+    volumes: 
+      - "~/fwcerts:/certs"

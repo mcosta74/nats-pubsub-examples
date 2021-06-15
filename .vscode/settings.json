@@ -1,0 +1,3 @@
+{
+  "python.pythonPath": "${workspaceFolder}/pyreceiver/.venv/bin/python"
+}
