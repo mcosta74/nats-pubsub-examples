@@ -13,12 +13,20 @@ export interface ChatMessage {
   providedIn: 'root',
 })
 export class NatsService implements OnDestroy {
-  private conn: NatsConnection | null = null;
+  private conn: NatsConnection | null;
 
   private _messages$ = new Subject<ChatMessage>();
-  messages$ = this._messages$.asObservable();
+  get messages$(): Observable<ChatMessage> {
+    return this._messages$.asObservable();
+  }
 
-  constructor() {}
+  get isConnected(): boolean {
+    return this.conn !== null;
+  }
+
+  constructor() {
+    this.conn = null;
+  }
 
   async ngOnDestroy() {
     if (this.conn !== null) {
@@ -27,11 +35,13 @@ export class NatsService implements OnDestroy {
   }
 
   async connect() {
+    if (this.isConnected) {
+      return;
+    }
+
     try {
       this.conn = await connect({
         servers: 'wss://massimo-mbp.fwx.one:8443',
-        // port: 8443,
-        // debug: true,
       });
     } catch (err) {
       console.error('Error:', err);

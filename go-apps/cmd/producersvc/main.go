@@ -17,8 +17,8 @@ func main() {
 	}
 	defer internal.NatsClose(nc)
 
-	for i := 0; i < 10; i++ {
-		if err := nc.Publish("chat.msg", []byte(fmt.Sprintf("Hello #%d", i))); err != nil {
+	for i := 0; i < 20; i++ {
+		if err := nc.Publish("chat.msg", []byte(fmt.Sprintf("%s Hello", time.Now().Format(time.RFC3339)))); err != nil {
 			log.Fatal(err)
 		}
 		time.Sleep(time.Second * 1)

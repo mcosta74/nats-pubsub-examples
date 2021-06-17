@@ -1,3 +1,14 @@
 <div cds-layout="vertical gap:md">
-  <cds-button (click)="onConnect()">Connect</cds-button>
+  <div *ngIf="isConnected; then connectedBlock else disconnectedBlock"></div>
+  <ng-template #disconnectedBlock>
+    <cds-button (click)="onConnect()">Connect</cds-button>
+  </ng-template>
+  <ng-template #connectedBlock>
+    <p cds-text="message" *ngIf="messages.length === 0">Waiting for messages...</p>
+    <ul cds-list>
+      <li *ngFor="let msg of messages" cds-text="body">
+        Subject: {{msg.subject}}<ng-container *ngIf="msg.data">, Data: {{msg.data}}</ng-container>
+      </li>
+    </ul>
+  </ng-template>
 </div>
