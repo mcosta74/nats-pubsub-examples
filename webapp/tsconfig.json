@@ -19,7 +19,17 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "nkeys.js": [
+        "node_modules/nkeys.js/nkeys.mjs",
+        "node_modules/nkeys.js/lib/nkeys.d.ts",
+      ],
+      "nats.ws": [
+        "node_modules/nats.ws/nats.cjs",
+        "node_modules/nats.ws/nats.d.ts",
+      ],
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
