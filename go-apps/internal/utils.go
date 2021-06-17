@@ -6,11 +6,15 @@ import (
 	"github.com/nats-io/nats.go"
 )
 
-func NatsConnect() (*nats.Conn, error) {
+func NatsConnect(options ...nats.Option) (*nats.Conn, error) {
 	log.Printf("Connecting to %v\n", nats.DefaultURL)
+
+	opts := []nats.Option{nats.ClientCert("/usr/local/filewave/certs/server.crt", "/usr/local/filewave/certs/server.key")}
+	opts = append(opts, options...)
+
 	return nats.Connect(
 		"massimo-mbp.fwx.one",
-		nats.ClientCert("/usr/local/filewave/certs/server.crt", "/usr/local/filewave/certs/server.key"),
+		opts...,
 	)
 }
 
