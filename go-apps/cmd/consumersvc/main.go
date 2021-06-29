@@ -13,7 +13,7 @@ func main() {
 	fmt.Println("Consumer")
 	defer fmt.Println("Consumer Done")
 
-	nc, err := internal.NatsConnect()
+	nc, err := internal.NatsConnect(nats.Name("Go Consumer"))
 	if err != nil {
 		log.Fatalf("Error connecting to nats: %v", err)
 	}

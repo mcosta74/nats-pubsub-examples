@@ -42,6 +42,9 @@ export class NatsService implements OnDestroy {
     try {
       this.conn = await connect({
         servers: 'wss://massimo-mbp.fwx.one:8443',
+        // servers: 'demo.nats.io',
+
+        name: 'Web App',
       });
     } catch (err) {
       console.error('Error:', err);
